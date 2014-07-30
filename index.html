@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Alarmee</title>
     
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -15,7 +15,18 @@
   <body>
     <div id="content" class="container" ng-controller="AlarmsCtrl">
       <h1>Alarmee</h1>
-    <p id="geolocation">Finding geolocation...</p>
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Crear alarma</h2>
+        <input type="text" class="form-control" placeholder="Direccion" required autofocus>
+        <input type="text" class="form-control" placeholder="Radio (mts)" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-address"> Recordar esta direccion
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Crear</button>
+      </form>
+    </div>
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="js/lib/underscore-min.js"></script>
