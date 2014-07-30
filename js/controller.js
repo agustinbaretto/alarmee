@@ -3,7 +3,11 @@ var app = angular.module("Alarmee", ['ui.bootstrap']);
 app.controller("AlarmsCtrl", ['$scope', function($scope) {
     $scope.alarms = [];
     $scope.alerts = [];
-    $scope.isCollapsed = true;
+    $scope.geocoder = new google.maps.Geocoder();
+    $scope.currentPosition = "";
+    $scope.targetLatitude = "";
+    $scope.targetLongitude = "";
+    $scope.targetAddress = "";
     
     $scope.addAlarm = function()
 	{
@@ -23,4 +27,19 @@ app.controller("AlarmsCtrl", ['$scope', function($scope) {
 	$scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
     };
+
+    $scope.getTargetPosition = function() {
+        $scope.geocoder.geocode( {'address': $scope.targetAddress}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {	
+   	 	        $scope.targetLatitude = results[0].geometry.location.lat();        
+   	 	        $scope.targetLongitude = results[0].geometry.location.lng();
+   	 	   	 	//watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+   	        } else {
+           	   alert('Geocode was not successful for the following reason: ' + status);
+   	        }
+        });
+    }
+    
+    $scope.getCurrentPosition = function() {
+    }
 }]);
