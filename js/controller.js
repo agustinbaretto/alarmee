@@ -11,6 +11,8 @@ app.controller("AlarmsCtrl", ['$scope', function($scope) {
     $scope.targetAddress = "";
     $scope.watchID = "";
     
+    Number.prototype.toRad = function() { return this * (Math.PI / 180); };
+    
     $scope.addAlarm = function()
 	{
 	    var size = _.size($scope.alarms);
