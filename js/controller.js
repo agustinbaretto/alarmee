@@ -4,10 +4,12 @@ app.controller("AlarmsCtrl", ['$scope', function($scope) {
     $scope.alarms = [];
     $scope.alerts = [];
     $scope.geocoder = new google.maps.Geocoder();
-    $scope.currentPosition = "";
+    $scope.currentLatitude = "";
+    $scope.currentLongitude = "";
     $scope.targetLatitude = "";
     $scope.targetLongitude = "";
     $scope.targetAddress = "";
+    $scope.watchID = "";
     
     $scope.addAlarm = function()
 	{
@@ -33,13 +35,41 @@ app.controller("AlarmsCtrl", ['$scope', function($scope) {
             if (status == google.maps.GeocoderStatus.OK) {	
    	 	        $scope.targetLatitude = results[0].geometry.location.lat();        
    	 	        $scope.targetLongitude = results[0].geometry.location.lng();
-   	 	   	 	//watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
    	        } else {
            	   alert('Geocode was not successful for the following reason: ' + status);
    	        }
         });
     }
     
+    $scope.onSuccess = function(position) {
+       $scope.currentLatitude = position.coords.latitude;
+       $scope.currentLongitude = position.coords.longitude;
+       
+       $scope.getDistance();
+   }
+    
     $scope.getCurrentPosition = function() {
+        $scope.watchID = navigator.geolocation.watchPosition($scope.onSuccess, $scope.onError, { timeout: 30000 });
     }
+    
+    $scope.getDistance = function()
+    {        
+        var lat1 = $scope.currentLatitude;
+       	var lat2 = $scope.targetLatitude;
+       	var lon1 = $scope.currentLongitude;
+       	var lon2 = $scope.targetLongitude;
+   	
+        var R = 6371; // km
+        var dLat = (lat2-lat1).toRad();
+        var dLon = (lon2-lon1).toRad();
+        lat1 = lat1.toRad();
+        lat2 = lat2.toRad();
+       
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+               Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        var distance = R * c;
+       
+        alert(distance + "km");
+   }
 }]);
