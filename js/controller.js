@@ -72,6 +72,7 @@ app.controller("AlarmsCtrl", ['$scope', function($scope) {
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
         var distance = R * c;
        
+        window.plugin.backgroundMode.enable();
         alert(distance + "km");
    }
 }]);
