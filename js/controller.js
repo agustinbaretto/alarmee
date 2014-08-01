@@ -51,6 +51,7 @@ app.controller("AlarmsCtrl", ['$scope', function($scope) {
    }
     
     $scope.getCurrentPosition = function() {
+        window.plugin.backgroundMode.enable();
         $scope.watchID = navigator.geolocation.watchPosition($scope.onSuccess, $scope.onError, { timeout: 30000 });
     }
     
@@ -71,8 +72,11 @@ app.controller("AlarmsCtrl", ['$scope', function($scope) {
                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
         var distance = R * c;
-       
-        window.plugin.backgroundMode.enable();
-        alert(distance + "km");
+        
+        if(distance < 2){
+            alert("cercaaaa!");}
+            else{
+                alert("not yet");
+            }
    }
 }]);
