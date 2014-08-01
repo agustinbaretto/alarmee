@@ -1,4 +1,4 @@
-var app = angular.module("Alarmee", ['ui.bootstrap']);
+var app = angular.module("Alarmee", ['mobile-angular-ui']);
  
 app.controller("AlarmsCtrl", ['$scope', function($scope) {
     $scope.alarms = [];
@@ -49,9 +49,13 @@ app.controller("AlarmsCtrl", ['$scope', function($scope) {
        
        $scope.getDistance();
    }
+   
+   $scope.onError = function(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
     
     $scope.getCurrentPosition = function() {
-        window.plugin.backgroundMode.enable();
         $scope.watchID = navigator.geolocation.watchPosition($scope.onSuccess, $scope.onError, { timeout: 30000 });
     }
     
