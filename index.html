@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ejemplo de Notification</title>
+    <title>Notification Example</title>
 
-    <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-    // Espere a que PhoneGap se inicie
+    // Wait for Cordova to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    // PhoneGap esta listo
+    // Cordova is ready
     //
     function onDeviceReady() {
-        // vacio
+        // Empty
     }
 
-    // Muestra un cuadro de dialogo personalizado.
+    // Show a custom alert
     //
     function showAlert() {
         navigator.notification.alert(
-        'Eres el ganador!',     // mensaje (message)
-        'Game Over',            // titulo (title)
-        'Cerrar'                // nombre del botón (buttonName)
+            'You are the winner!',  // message
+            'Game Over',            // title
+            'Done'                  // buttonName
         );
     }
 
-    // Reproduce tres beeps
+    // Beep three times
     //
     function playBeep() {
         navigator.notification.beep(3);
     }
 
-    // Vibra dos segundos
+    // Vibrate for 2 seconds
     //
     function vibrate() {
         navigator.notification.vibrate(2000);
     }
+
+    </script>
+  </head>
+  <body>
+    <p><a href="#" onclick="showAlert(); return false;">Show Alert</a></p>
+    <p><a href="#" onclick="playBeep(); return false;">Play Beep</a></p>
+    <p><a href="#" onclick="vibrate(); return false;">Vibrate</a></p>
+  </body>
+</html>
