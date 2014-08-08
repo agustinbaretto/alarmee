@@ -6,7 +6,7 @@
     <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-    // Espere a que PhoneGap inicie
+    // Espere a que PhoneGap se inicie
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -16,25 +16,24 @@
         // vacio
     }
 
-    // alerta cerrada
-    function alertDismissed() {
-        // hacer algo aquí
-    }
-
-    // Muestra un cuadro de dialogo personalizado
+    // Muestra un cuadro de dialogo personalizado.
     //
     function showAlert() {
-    navigator.notification.alert(
-    'Eres el ganador!',     // mensaje (message)
-    alertDismissed,         // función 'callback' (alertCallback)
-    'Game Over',            // titulo (title)
-    'Cerrar'                // nombre del botón (buttonName)
-    );
+        navigator.notification.alert(
+        'Eres el ganador!',     // mensaje (message)
+        'Game Over',            // titulo (title)
+        'Cerrar'                // nombre del botón (buttonName)
+        );
     }
 
-    </script>
-  </head>
-  <body>
-    <p><a href="#" onclick="showAlert(); return false;">Mostrar cuadro de dialogo</a></p>
-  </body>
-</html>
+    // Reproduce tres beeps
+    //
+    function playBeep() {
+        navigator.notification.beep(3);
+    }
+
+    // Vibra dos segundos
+    //
+    function vibrate() {
+        navigator.notification.vibrate(2000);
+    }
